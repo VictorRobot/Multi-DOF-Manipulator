@@ -46,7 +46,7 @@ RehExo.gravity=[0 0 9.81];
 qInit = [pi/2 0 0 pi];
 q1=[pi/2 0 pi/2 pi/2];
 RehExo.plot(qInit);
-%T0 = fkine(RehExo, qInit);
+%T0 = RehExo.fkine(qInit);
 step = 0:.04:1;
 [traj1,traj1d,traj1dd]=jtraj(qInit,q1,step);
 [traj2,traj2d,traj2dd]=jtraj(q1,qInit,step);
@@ -56,7 +56,7 @@ qReach(4,4)=0;
 while a<2
     q0=qInit;
 for i=1:1:size(step,2)
-    atj=RehExo.fkine(traj1(i,:));%得到目标点位姿矩阵
+    atj=RehExo.fkine(traj1(i,:));% Target Transform Matrix
     qReach=RehExo.ikcon(atj,q0);%robot.ikcon(T, q0) specify the initial joint coordinates q0 used for the minimisation. 
     q0=qReach;
     jta=transpose(atj);
